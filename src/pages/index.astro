@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import yaml from 'js-yaml';
+
+// Load certifications from YAML files
+const dataDir = path.join(process.cwd(), 'data', 'certifications');
+const files = fs.readdirSync(dataDir).filter(f => f.endsWith('.yml')).sort();
+const certifications = files.map(f => {
+  const content = fs.readFileSync(path.join(dataDir, f), 'utf-8');
+  return yaml.load(content);
+});
+
+// Date formatter
+function formatDate(dateStr: string): string {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+}
+---
+
+<Layout>
+  <!-- Certifications Section -->
+  <div id="certifications" class="mb-48 pt-80 md:pt-8">
+    <div class="-my-48 group md:mt-72">
+      {certifications.map((cert) => (
+        <article class="my-48" itemscope itemtype="http://schema.org/CreativeWork">
+          <a
+            href={cert.link}
+            target="_blank"
+            rel="noopener"
+            class="flex md:items-center group-hover:opacity-50 hover:opacity-important transition group-2"
+          >
+            <div class="flex items-center justify-center flex-none mr-24 md:mr-40 w-80 h-80 md:w-120 md:h-120 text-zenith group-2-hover:scale-11/10x transition">
+              <img
+                src={cert.type}
+                alt={cert.title}
+                style="width: 100px; height: 100px; object-fit: contain;"
+              />
+            </div>
+            <div>
+              <h2
+                class="text-lg font-semibold leading-snug md:leading-tight text-zenith"
+                itemprop="name"
+              >{cert.title}</h2>
+              <p class="mt-8 mb-2">
+                <span itemprop="publisher">{cert.platform}</span>
+              </p>
+              <time
+                class="inline-block mt-8 text-xs font-bold tracking-widest uppercase text-zenith"
+                itemprop="datePublished"
+                datetime={cert.date}
+              >{formatDate(cert.date)}</time>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Skills Section -->
+  <div id="skills" class="mb-48 pt-80">
+
+    <!-- Orchestration & Containers -->
+    <div class="mb-32">
+      <h3 class="text-xs font-bold tracking-widest uppercase text-dawn mb-16">Orchestration & Containers</h3>
+      <div class="skills-grid">
+        <span class="skill-icon" title="Kubernetes"><img src="/images/kubernetes.svg" alt="Kubernetes" /></span>
+        <span class="skill-icon" title="Docker"><img src="/images/docker.svg" alt="Docker" /></span>
+        <span class="skill-icon" title="Helm"><img src="/images/helm.svg" alt="Helm" /></span>
+        <span class="skill-icon" title="ArgoCD"><img src="/images/argocd.svg" alt="ArgoCD" /></span>
+      </div>
+    </div>
+
+    <!-- IaC & Automation -->
+    <div class="mb-32">
+      <h3 class="text-xs font-bold tracking-widest uppercase text-dawn mb-16">IaC & Automation</h3>
+      <div class="skills-grid">
+        <span class="skill-icon" title="Terraform"><img src="/images/terraform_logo.svg" alt="Terraform" /></span>
+        <span class="skill-icon" title="Ansible"><img src="/images/ansible.svg" alt="Ansible" /></span>
+        <span class="skill-icon" title="Cloud-Init"><img src="/images/cloudinit.svg" alt="Cloud-Init" /></span>
+      </div>
+    </div>
+
+    <!-- Cloud Platforms -->
+    <div class="mb-32">
+      <h3 class="text-xs font-bold tracking-widest uppercase text-dawn mb-16">Cloud Platforms</h3>
+      <div class="skills-grid">
+        <span class="skill-icon" title="Microsoft Azure"><img src="/images/microsoftazure.svg" alt="Microsoft Azure" /></span>
+        <span class="skill-icon" title="OVHcloud"><img src="/images/ovhcloud.svg" alt="OVHcloud" /></span>
+        <span class="skill-icon" title="Kumo Networks"><img src="/images/kumo.png" alt="Kumo Networks" /></span>
+        <span class="skill-icon" title="Cloudflare"><img src="/images/cloudflare.svg" alt="Cloudflare" /></span>
+      </div>
+    </div>
+
+    <!-- Systems & Networking -->
+    <div class="mb-32">
+      <h3 class="text-xs font-bold tracking-widest uppercase text-dawn mb-16">Systems & Networking</h3>
+      <div class="skills-grid">
+        <span class="skill-icon" title="Linux"><img src="/images/linux.svg" alt="Linux" /></span>
+        <span class="skill-icon" title="VMware"><img src="/images/vmware_logo.svg" alt="VMware" /></span>
+        <span class="skill-icon" title="Hyper-V"><img src="/images/hyperv.svg" alt="Hyper-V" /></span>
+        <span class="skill-icon" title="Bash"><img src="/images/gnubash.svg" alt="Bash" /></span>
+      </div>
+    </div>
+
+    <!-- CI/CD & Tools -->
+    <div class="mb-32">
+      <h3 class="text-xs font-bold tracking-widest uppercase text-dawn mb-16">CI/CD & Tools</h3>
+      <div class="skills-grid">
+        <span class="skill-icon" title="Git"><img src="/images/git.svg" alt="Git" /></span>
+        <span class="skill-icon" title="Jenkins"><img src="/images/jenkins.svg" alt="Jenkins" /></span>
+        <span class="skill-icon" title="GitLab"><img src="/images/gitlab.svg" alt="GitLab" /></span>
+      </div>
+    </div>
+
+    <!-- Observability & Monitoring -->
+    <div class="mb-32">
+      <h3 class="text-xs font-bold tracking-widest uppercase text-dawn mb-16">Observability & Monitoring</h3>
+      <div class="skills-grid">
+        <span class="skill-icon" title="Grafana"><img src="/images/grafana.svg" alt="Grafana" /></span>
+        <span class="skill-icon" title="Zabbix"><img src="/images/zabbix.svg" alt="Zabbix" /></span>
+        <span class="skill-icon" title="OpenSearch"><img src="/images/opensearch.svg" alt="OpenSearch" /></span>
+        <span class="skill-icon" title="Logstash"><img src="/images/logstash.svg" alt="Logstash" /></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience Section -->
+  <div id="experience" class="mb-48 pt-80">
+    <div class="experience-timeline">
+      <div class="timeline-header">
+        <span class="text-xs font-bold tracking-widest uppercase text-dawn">CIC Consulting Informático</span>
+        <span class="text-xs text-dawn ml-8">&middot; 12 years</span>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-content">
+          <h3 class="text-base font-semibold text-zenith">IT Infrastructure Engineer</h3>
+          <p class="text-xs text-dawn mt-4">Jan 2026 &ndash; Present</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-base font-semibold text-zenith">Senior Analyst (Expert Technician)</h3>
+          <p class="text-xs text-dawn mt-4">Jan 2023 &ndash; Jan 2026 &middot; 3 years 2 months</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-base font-semibold text-zenith">Systems Analyst</h3>
+          <p class="text-xs text-dawn mt-4">Jan 2020 &ndash; Jan 2023 &middot; 3 years 3 months</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-base font-semibold text-zenith">Senior System Administrator</h3>
+          <p class="text-xs text-dawn mt-4">Jan 2018 &ndash; Jan 2020 &middot; 2 years 1 month</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-base font-semibold text-zenith">Systems Technician</h3>
+          <p class="text-xs text-dawn mt-4">Apr 2016 &ndash; Jan 2018 &middot; 1 year 10 months</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="text-base font-semibold text-zenith">Dual Training Program</h3>
+          <p class="text-xs text-dawn mt-4">Jan 2014 &ndash; Apr 2016 &middot; 2 years 4 months</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credits -->
+  <p class="text-sm mt-104 ml-104 md:ml-160">
+    Built by
+    <span class="text-zenith font-semibold">Jose Luis Macho Merino</span>.
+    Inspired by
+    <a href="https://ramiroalvfer.dev/" target="_blank" rel="noopener" class="text-zenith font-semibold hover:text-dawn transition hover:underline">Ramiro Álvarez</a>
+    · <a href="https://k8scockpit.tech/" target="_blank" rel="noopener" class="text-zenith font-semibold hover:text-dawn transition hover:underline">K8s Cockpit</a>.
+  </p>
+</Layout>

@@ -1,0 +1,170 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Jose Luis Macho Merino' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/images/jlmacho.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <meta name="author" content="Jose Luis Macho Merino" />
+    <meta property="og:title" content="Jose Luis Macho Merino" />
+    <meta property="og:site_name" content="Jose Luis Macho Merino" />
+    <meta property="og:image" content="/images/jlmacho.png" />
+    <meta property="og:description" content="Jose Luis Macho Merino | Infrastructure & Cybersecurity Engineer | Kubernetes, Ansible, Terraform, IaC, DevOps" />
+    <meta name="description" content="Jose Luis Macho Merino | Infrastructure & Cybersecurity Engineer | Kubernetes, Ansible, Terraform, IaC, DevOps" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-night overflow-x-hidden">
+    <div class="relative flex flex-col w-screen mx-auto font-sans text-base max-w-1440 text-dawn md:flex-row">
+      <!-- Sidebar -->
+      <div class="static flex flex-col justify-between w-full p-32 md:max-w-496 lg:max-w-536 md:fixed lg:py-48 lg:px-48 bg-sidebar md:rounded-3xl md:m-16 sidebar-panel">
+        <div class="flex flex-col">
+          <!-- Profile photo + name -->
+          <div class="flex items-center mb-24">
+            <img
+              src="/images/jlmacho.png"
+              alt="Jose Luis Macho Merino"
+              class="sidebar-avatar mr-24"
+            />
+            <div>
+              <h1 class="text-2xl font-bold leading-tight text-light">
+                Jose Luis<br/>Macho Merino
+              </h1>
+              <p class="text-sm font-semibold text-accent mt-4 tracking-wide">
+                Infrastructure &amp; Cybersecurity Engineer
+              </p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="w-48 h-2 bg-accent rounded mb-24"></div>
+
+          <!-- About -->
+          <div class="text-muted leading-relaxed text-sm">
+            <p>
+              Working at
+              <a href="https://www.cic.es" target="_blank" rel="noopener" class="text-accent hover:text-accent-hover transition">CIC Consulting Informático</a>.
+              Focused on automation and efficiency in infrastructure environments.
+              Building solutions with Kubernetes, Ansible, and Terraform
+              using IaC practices and DevOps methodologies.
+            </p>
+            <p class="mt-16">
+              Committed to continuous improvement, new technologies,
+              and creating more agile, secure, and automated environments.
+            </p>
+          </div>
+
+          <!-- Navigation -->
+          <nav class="text-sm font-bold uppercase hidden mt-40 md:block" id="sidebar-nav">
+            <ul class="flex flex-row md:flex-col md:-my-16">
+              <li class="md:my-16">
+                <a href="#certifications" class="nav-link inline-flex items-center text-muted hover:text-light transition group" data-index="0">
+                  <span class="text-xs tracking-wide">01</span>
+                  <span class="nav-line inline-block w-24 h-px mx-16 -mt-px bg-muted transition"></span>
+                  <span class="text-xs tracking-widest uppercase">Certifications</span>
+                </a>
+              </li>
+              <li class="md:my-16">
+                <a href="#skills" class="nav-link inline-flex items-center text-muted hover:text-light transition group" data-index="1">
+                  <span class="text-xs tracking-wide">02</span>
+                  <span class="nav-line inline-block w-24 h-px mx-16 -mt-px bg-muted transition"></span>
+                  <span class="text-xs tracking-widest uppercase">Skills</span>
+                </a>
+              </li>
+              <li class="md:my-16">
+                <a href="#experience" class="nav-link inline-flex items-center text-muted hover:text-light transition group" data-index="2">
+                  <span class="text-xs tracking-wide">03</span>
+                  <span class="nav-line inline-block w-24 h-px mx-16 -mt-px bg-muted transition"></span>
+                  <span class="text-xs tracking-widest uppercase">Experience</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Social links -->
+        <div class="flex items-center mt-48 md:mt-32">
+          <ul class="flex space-x-24 text-muted">
+            <li>
+              <a href="https://github.com/dev-jlmacho" rel="noopener" target="_blank" class="social-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-32 h-32 fill-current">
+                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/jlmacho" rel="noopener" target="_blank" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="w-32 h-32 fill-current">
+                  <path fill="none" d="M0 0h24v24H0z"/>
+                  <path d="M6.94 5a2 2 0 11-4-.002 2 2 0 014 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://openprofile.dev/profile/jlmacho" rel="noopener" target="_blank" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="w-32 h-32 fill-current">
+                  <path d="M4.8 19.2h9.6V24H0V9.6h4.8v9.6zM0 0v7.2h4.8V4.822h14.4V19.2h-2.4V24H24V0H0z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="static p-32 md:max-w-536 lg:max-w-736 md:absolute md:right-0 lg:py-48 lg:pr-88 md:pl-0">
+        <slot />
+      </div>
+
+      <!-- Gradient overlays -->
+      <div class="fixed bottom-0 left-0 hidden w-full h-32 pointer-events-none md:block gradient-y-transparent-night"></div>
+      <div class="fixed top-0 left-0 hidden w-full h-32 pointer-events-none md:block gradient-y-night-transparent"></div>
+    </div>
+
+    <script>
+      const sections = ['certifications', 'skills', 'experience'];
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      function updateActiveSection() {
+        let active = 0;
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const el = document.getElementById(sections[i]);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.3) {
+              active = i;
+              break;
+            }
+          }
+        }
+        navLinks.forEach((link) => {
+          const idx = parseInt(link.dataset.index);
+          const line = link.querySelector('.nav-line');
+          if (idx === active) {
+            link.classList.add('text-light');
+            link.classList.remove('text-muted');
+            line.classList.add('w-48', 'bg-accent');
+            line.classList.remove('w-24', 'bg-muted');
+          } else {
+            link.classList.remove('text-light');
+            link.classList.add('text-muted');
+            line.classList.remove('w-48', 'bg-accent');
+            line.classList.add('w-24', 'bg-muted');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveSection);
+      updateActiveSection();
+    </script>
+  </body>
+</html>
