@@ -7,10 +7,17 @@ import yaml from 'js-yaml';
 // Load certifications from YAML files
 const dataDir = path.join(process.cwd(), 'data', 'certifications');
 const files = fs.readdirSync(dataDir).filter(f => f.endsWith('.yml')).sort();
-const certifications = files.map(f => {
-  const content = fs.readFileSync(path.join(dataDir, f), 'utf-8');
-  return yaml.load(content);
-});
+const certifications = files
+  .map(f => {
+    const content = fs.readFileSync(path.join(dataDir, f), 'utf-8');
+    return yaml.load(content);
+  })
+  .sort((a, b) => {
+    // Orden descendente por fecha (más reciente primero)
+    if (!a.date) return 1;
+    if (!b.date) return -1;
+    return b.date.localeCompare(a.date);
+  });
 
 // Date formatter
 function formatDate(dateStr: string): string {
